@@ -4,12 +4,12 @@ import android.databinding.DataBindingUtil;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xuwab.coordinatorlayout.databinding.ActivityMainBinding;
 
@@ -20,31 +20,32 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv;
     private List<String> list;
-    private ActivityMainBinding binding;
+    public ActivityMainBinding binding;
     private View contentView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding.setMain(this);
 //        rv=binding.rvText;
 //        initData();
 //        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setAdapter(new HomeAdater());
-        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view,"FAB",Snackbar.LENGTH_LONG)
-                        .setAction("cancel", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //这里的单击事件代表点击消除Action后的响应事件
-
-                            }
-                        })
-                        .show();
-            }
-        });
+//        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Snackbar.make(view,"FAB",Snackbar.LENGTH_LONG)
+//                        .setAction("cancel", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                //这里的单击事件代表点击消除Action后的响应事件
+//
+//                            }
+//                        })
+//                        .show();
+//            }
+//        });
     }
 
     private void initData() {
@@ -81,15 +82,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void btn(){
+        Toast.makeText(this,"btn",Toast.LENGTH_LONG).show();
+    }
     public void testSnackBar(){
-//        Snackbar.make(getWindow().getDecorView(),"Hello Word",Snackbar.LENGTH_LONG)
-//                .setAction("cancel", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                })
-//                .show();
+        Snackbar.make(binding.fab2,"Hello Word",Snackbar.LENGTH_LONG)
+                .setAction("cancel", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .show();
+        Toast.makeText(this,"ss",Toast.LENGTH_LONG).show();
 //        Snackbar.make(binding.fab,"FAB",Snackbar.LENGTH_LONG)
 //                        .setAction("cancel", new View.OnClickListener() {
 //                            @Override
