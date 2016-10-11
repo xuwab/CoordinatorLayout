@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.xuwab.coordinatorlayout.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import adater.MyPageAdater;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv;
@@ -25,27 +28,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setMain(this);
-//        rv=binding.rvText;
-//        initData();
-//        rv.setLayoutManager(new LinearLayoutManager(this));
-//        rv.setAdapter(new HomeAdater());
-//        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Snackbar.make(view,"FAB",Snackbar.LENGTH_LONG)
-//                        .setAction("cancel", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //这里的单击事件代表点击消除Action后的响应事件
-//
-//                            }
-//                        })
-//                        .show();
-//            }
-//        });
+        rv=binding.rvText;
+        initData();
+        setFragmentPage();
+        rv.setLayoutManager(new LinearLayoutManager(this));
+//        rv.setLayoutManager(new FullyLinearLayoutManager(this));
+//        rv.setNestedScrollingEnabled(false);
+        rv.setAdapter(new HomeAdater());
+    }
+
+    private void setFragmentPage() {
+//        binding.vp.setAdapter(new MyPageAdater(getSupportFragmentManager(),this));
+//        binding.tabs.setupWithViewPager(binding.vp);
     }
 
     private void initData() {
@@ -82,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void btn(){
-        Toast.makeText(this,"btn",Toast.LENGTH_LONG).show();
-    }
     public void testSnackBar(){
         Snackbar.make(binding.fab2,"Hello Word",Snackbar.LENGTH_LONG)
                 .setAction("cancel", new View.OnClickListener() {
@@ -94,30 +87,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
-        Toast.makeText(this,"ss",Toast.LENGTH_LONG).show();
-//        Snackbar.make(binding.fab,"FAB",Snackbar.LENGTH_LONG)
-//                        .setAction("cancel", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //这里的单击事件代表点击消除Action后的响应事件
-//
-//                            }
-//                        })
-//                        .show();
-//        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Snackbar.make(view,"FAB2",Snackbar.LENGTH_LONG)
-//                        .setAction("cancel", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //这里的单击事件代表点击消除Action后的响应事件
-//
-//                            }
-//                        })
-//                        .show();
-//            }
-//        });
     }
 }

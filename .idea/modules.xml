@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CoordinatorLayout.iml" filepath="$PROJECT_DIR$/CoordinatorLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewpagerdemo1/viewpagerdemo1.iml" filepath="$PROJECT_DIR$/viewpagerdemo1/viewpagerdemo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewpagerfragment/viewpagerfragment.iml" filepath="$PROJECT_DIR$/viewpagerfragment/viewpagerfragment.iml" />
     </modules>
   </component>
 </project>
