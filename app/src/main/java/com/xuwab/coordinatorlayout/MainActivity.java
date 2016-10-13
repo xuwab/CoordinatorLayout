@@ -1,12 +1,17 @@
 package com.xuwab.coordinatorlayout;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,24 +35,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setMain(this);
-        rv=binding.rvText;
+        setSupportActionBar(binding.toolbar);
+//        rv=binding.rvText;
         initData();
         setFragmentPage();
-        rv.setLayoutManager(new LinearLayoutManager(this));
+//        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setLayoutManager(new FullyLinearLayoutManager(this));
 //        rv.setNestedScrollingEnabled(false);
-        rv.setAdapter(new HomeAdater());
+//        rv.setAdapter(new HomeAdater());
+        if (savedInstanceState == null) {
+            // Set the local night mode to some value
+            getDelegate().setLocalNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+            // 调用 recreate() 使设置生效
+            recreate();
+        }
     }
 
     private void setFragmentPage() {
-//        binding.vp.setAdapter(new MyPageAdater(getSupportFragmentManager(),this));
-//        binding.tabs.setupWithViewPager(binding.vp);
+        binding.vp.setAdapter(new MyPageAdater(getSupportFragmentManager(),this));
+        binding.tabs.setupWithViewPager(binding.vp);
     }
 
     private void initData() {
         list=new ArrayList<>();
         for(int i=0;i<30;i++){
-            list.add("test"+i);
+            list.add("大智障");
         }
     }
 
@@ -79,13 +92,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testSnackBar(){
-        Snackbar.make(binding.fab2,"Hello Word",Snackbar.LENGTH_LONG)
-                .setAction("cancel", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+//        Snackbar.make(binding.fab2,"我是大智障，怎么了",Snackbar.LENGTH_LONG)
+//                .setAction("cancel", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+//                .show();
+    }
 
-                    }
-                })
-                .show();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_night:
+                Toast.makeText(this,"点击了夜间模式",Toast.LENGTH_SHORT).show();
+                int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+                switch (currentMode) {
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        getDelegate().setLocalNightMode(
+                                AppCompatDelegate.MODE_NIGHT_YES);
+                        break;
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        getDelegate().setLocalNightMode(
+                                AppCompatDelegate.MODE_NIGHT_NO);
+                        break;
+                }
+                recreate();
+                break;
+//            case R.id.action_item1:
+//                Toast.makeText(this,"点击了扫描",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.action_item2:
+//                Toast.makeText(this,"点击了扫描",Toast.LENGTH_SHORT).show();
+//                break;
+//            default:break;
+        }
+        return true;
+
     }
 }

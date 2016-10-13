@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoordinatorLayout</string>
+    <string name="title_night_mode">夜间模式</string>
 </resources>
