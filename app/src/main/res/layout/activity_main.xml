@@ -73,7 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/colorAccent"/>
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabSelectedTextColor="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"/>
         </LinearLayout>
 
         <!--<android.support.v4.widget.NestedScrollView-->

@@ -5,6 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.xuwab.coordinatorlayout.R;
 
 import fragment.Pagefragment;
 
@@ -31,8 +37,17 @@ public class MyPageAdater extends FragmentPagerAdapter {
         return count;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titles[position];
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        return titles[position];
+//    }
+    public View getTabView(int position){
+        //首先为子tab布置一个布局
+        View view=LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+        TextView tv = (TextView) view.findViewById(R.id.tv_tab);
+        tv.setText(titles[position]);
+        ImageView iv = (ImageView) view.findViewById(R.id.iv_tab);
+        iv.setImageResource(R.drawable.ic_night);
+        return view;
     }
 }

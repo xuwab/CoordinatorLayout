@@ -3,6 +3,7 @@ package com.xuwab.coordinatorlayout;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv;
     private List<String> list;
+    private MyPageAdater adater;
     public ActivityMainBinding binding;
     private View contentView;
     @Override
@@ -53,8 +55,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setFragmentPage() {
-        binding.vp.setAdapter(new MyPageAdater(getSupportFragmentManager(),this));
+        adater=new MyPageAdater(getSupportFragmentManager(),this);
+        binding.vp.setAdapter(adater);
         binding.tabs.setupWithViewPager(binding.vp);
+        for(int i=0;i<binding.tabs.getTabCount();i++){
+            TabLayout.Tab tab=binding.tabs.getTabAt(i);
+            if(tab!=null){
+                tab.setCustomView(adater.getTabView(i));
+            }
+        }
     }
 
     private void initData() {
